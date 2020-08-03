@@ -1,0 +1,67 @@
+<div>
+  <h4 class="title mb-4">{{'ocrrecog.recog'|translate}}</h4>
+      <div class="row mb-4">
+          <div class="col-md-12">
+              <div class="card border-0 rounded-0">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="custom-file-upload">
+                              <label class="btn btn-outline-primary waves-effect">
+                                  <input type="file" name="file" accept=".pdf,image/*" (change)="handleInputChange($event)">
+                                  <i class="fa fa-cloud-upload"></i> {{'ocrrecog.upload'|translate}}
+                              </label>
+                          </div>
+                          <div *ngIf="imageSrc!==null && imageSrc!==undefined && imageSrc!==''">
+                              &nbsp;&nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)="zoom(true)"> <i class="fa fa-plus"></i>{{'ocrrecog.zoomin'|translate}} </button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)="zoom(false)"> <i class="fa fa-minus"></i> {{'ocrrecog.zoomout'|translate}}</button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)="ronate()"> <i class="fa fa-refresh"></i> {{'ocrrecog.ronate'|translate}}</button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)="CropMe()"> <i class="fa fa-arrows"></i> {{'ocrrecog.crop'|translate}}</button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)=validateOcr()>{{'ocrrecog.ocr'|translate}}</button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)=handWritting()> <i class="fa fa-edit"></i> {{'ocrrecog.ocrhandtext'|translate}}</button> &nbsp;
+                              <button type="button" class="btn btn-outline-primary waves-effect" (click)=extractTable()>{{'ocrrecog.ocrtable'|translate}}</button> &nbsp;
+                              <button *ngIf="ocrText!==undefined && ocrText!==''" type="button" class="btn btn-outline-primary waves-effect" (click)=spellCheck()> <i class="fa fa-cogs"></i> {{'ocrrecog.spellcheck'|translate}}</button>  
+  
+                          </div>
+                          <div *ngIf="resultResult!==null && resultResult!==undefined && resultResult!==''">
+                              <img class="small" [src]="resultResult" />
+                          </div>
+                      </div>
+                      <br><br>
+                      <div class="row">
+                          <div class="col-md-5">
+                                  
+                              <label class="uploader"  *ngIf="imageSrc===null || imageSrc===undefined || imageSrc===''">
+                                  <!-- <img [src]="imageSrc"  (load)="handleImageLoad()" [class.loaded]="imageLoaded"/>                          -->
+                              </label>
+                              <div *ngIf="imageSrc!==null && imageSrc!==undefined && imageSrc!==''" >
+                                      
+                                      <angular-cropper #angularCropper #image id="image" class="uploader" [cropperOptions]="config" (export)="resultImageFun($event)" (ready)="checkstatus($event)"[imageUrl]="imageSrc"></angular-cropper>
+                                      <div *ngIf="style">
+                                          <button type="button" class="next" (click)=next()> > </button>
+                                          <button type="button" class="prev" (click)=next()> < </button>
+                                      </div>
+                                      </div>
+                              </div>
+                          <div class="col-md-1 ocr">
+                              <!-- <button type="button" class="btn btn-outline-primary waves-effect" (click)=validateOcr()>OCR</button>       -->
+                          </div>
+                          <!-- <div class="col-md-5">
+                              <textarea name="Comments" mdInput cols="50"  [(value)]="ocrText" rows="17"></textarea>
+                          </div> -->
+                          <div class="col-md-5 container">
+                              <div class="background">
+                                  <button class="buttonInside btn btn-outline-primary waves-effect" (click)="copyInputMessage(inputResult)"><span><i class="fa fa-clone"></i></span></button>
+                                  <label *ngIf="ocrText!==''" class="text">&nbsp; {{'ocrrecog.format1'|translate}} {{label}}</label>
+                                  <label *ngIf="ocrText==''"  class="text">&nbsp; {{'ocrrecog.format'|translate}} </label>
+                              </div>
+                              <textarea name="Comments" mdInput cols="50"  [(value)]="ocrText" rows="17" #inputResult></textarea>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <ng4-loading-spinner [threshold]="0" [timeout]="100000" [zIndex]="100000"> </ng4-loading-spinner>
+  

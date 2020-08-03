@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Phát hiện vùng tổn thương</h5>
+        <div class="row">
+          <div class="custom-file-upload">
+            <label class="btn btn-outline-primary waves-effect">
+              <input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
+              <i class="fa fa-cloud-upload"></i> Upload
+            </label>
+          </div>
+          <div *ngIf="imageSrc!==null && imageSrc!==undefined && imageSrc!==''">
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-outline-primary waves-effect" (click)="zoom(true)"> <i class="fa fa-plus"></i>Zoom in </button> &nbsp;
+            <button type="button" class="btn btn-outline-primary waves-effect" (click)="zoom(false)"> <i class="fa fa-minus"></i> zoom out</button> &nbsp;
+            <button type="button" class="btn btn-outline-primary waves-effect" (click)="ronate()"> <i class="fa fa-refresh"></i> ronate</button> &nbsp;
+            <button type="button" class="btn btn-outline-primary waves-effect" (click)="CropMe()"> <i class="fa fa-arrows"></i> crop</button> &nbsp; 
+
+          </div>
+          <div *ngIf="resultResult!==null && resultResult!==undefined && resultResult!==''">
+              <img class="small" [src]="resultResult" />
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-5">
+                    
+                <!-- <label class="uploader"  *ngIf="imageSrc===null || imageSrc===undefined || imageSrc===''">
+                    <img [src]="imageSrc"  (load)="handleImageLoad()" [class.loaded]="imageLoaded"/>                         
+                </label> -->
+                <div *ngIf="imageSrc!==null && imageSrc!==undefined && imageSrc!==''" >
+                        
+                        <angular-cropper #angularCropper #image id="image" class="uploader" [cropperOptions]="config" (export)="resultImageFun($event)" (ready)="checkstatus($event)"[imageUrl]="imageSrc"></angular-cropper>
+                        <!-- <image-cropper
+                          [imageChangedEvent]="imageSrc"
+                          [maintainAspectRatio]="true"
+                          [aspectRatio]="4 / 3"
+                          format="png"
+                          (imageCropped)="imageCropped($event)"
+                          (imageLoaded)="imageLoaded()"
+                          (cropperReady)="cropperReady()"
+                          (loadImageFailed)="loadImageFailed()"
+                        > </image-cropper> -->
+                        <!-- <div *ngIf="style">
+                            <button type="button" class="next" (click)=next()> > </button>
+                            <button type="button" class="prev" (click)=next()> < </button>
+                        </div> -->
+                </div>
+              </div>
+        
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-plain">
+              
+              
+              <div class="card-header">
+                <h5 class="card-title">Nhũ ảnh bệnh nhân</h5>
+                
+                
+              
+              </div>
+              <div class="card-body">
+               
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-plain">
+              <div class="card-header">
+                <h5 class="card-title">Chẩn đoán</h5>
+              </div>
+              <div class="card-body">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="places-buttons">
+          <div class="row">
+            <div class="col-md-6 ml-auto mr-auto text-center">
+              <h4 class="card-title">
+                Notifications Places
+                <p class="category">Click to view notifications</p>
+              </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 ml-auto mr-auto">
+              <div class="row">
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('top','left')">Top Left</button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('top','center')">Top Center</button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('top','right')">Top Right</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 ml-auto mr-auto">
+              <div class="row">
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('bottom','left')">Bottom Left</button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('bottom','center')">Bottom Center</button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" (click)="showNotification('bottom','right')">Bottom Right</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
