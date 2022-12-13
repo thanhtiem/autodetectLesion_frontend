@@ -34,7 +34,7 @@
     "chartist": "0.11.2",
     "core-js": "3.6.4",
     "cropperjs": "^1.5.7",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "jquery": "3.4.1",
     "moment": "2.24.0",
     "ng4-loading-spinner": "^1.2.3",
